@@ -16,6 +16,7 @@ public class Constants {
     public enum BaseUrl {
         Doubao("https://ark.cn-beijing.volces.com/api/v3/", "豆包"),
         DeepSeek("https://api.deepseek.com/", "deepseek"),
+        Qwen("https://dashscope.aliyuncs.com/compatible-mode/v1/", "通义千问"),
         ;
         private String url;
         private String desc;
@@ -74,7 +75,6 @@ public class Constants {
         GLM_4_FlashX("glm-4-flashx", "高速低价：Flash增强版本，超快推理速度。"),
         GLM_4_Flash("glm-4-flash", "免费调用：智谱AI首个免费API，零成本调用大模型。"),
         GLM_4_AllTools("glm-4-alltools", "Agent模型：自主规划和执行复杂任务"),
-
         COGVIEW_3("cogview-3", "根据用户的文字描述生成图像,使用同步调用方式请求接口"),
 
         /**
@@ -82,6 +82,18 @@ public class Constants {
          */
         DeepSeek_V3("deepseek-chat", "deep-seek-v3"),
         DeepSeek_R1("deepseek-reasoner", "deep-seek-r1"),
+        /**
+         * Qwen
+         */
+        Qwen_Max("qwen-max", "通义千问2.5系列千亿级别超大规模语言模型，支持中文、英文等不同语言输入。随着模型的升级，qwen-max将滚动更新升级。如果希望使用固定版本，请使用历史快照版本。"),
+        Qwen_Max_Latest("qwen-max-latest", "通义千问系列效果最好的模型，本模型是动态更新版本，模型更新不会提前通知，适合复杂、多步骤的任务，模型中英文综合能力显著提升，模型人类偏好显著提升，模型推理能力和复杂指令理解能力显著增强，困难任务上的表现更优，数学、代码能力显著提升，提升对Table、JSON等结构化数据的理解和生成能力。"),
+        Qwen_Max_2024_09_19("qwen-max-2024-09-19", "通义千问系列效果最好的模型，适合复杂、多步骤的任务，模型中英文综合能力显著提升，模型人类偏好显著提升，模型推理能力和复杂指令理解能力显著增强，困难任务上的表现更优，数学、代码能力显著提升，提升对Table、JSON等结构化数据的理解和生成能力。"),
+        Qwen_Plus("qwen-plus", "通义千问超大规模语言模型的增强版，支持中文英文等不同语言输入。"),
+        Qwen_Plus_Latest("qwen-plus-latest", "通义千问系列能力均衡的模型，推理效果和速度介于通义千问-Max和通义千问-Turbo之间，适合中等复杂任务。本模型是动态更新版本，模型更新不会提前通知。"),
+        Qwen_plus_1220("qwen-plus-1220", "通义千问系列能力均衡的模型，推理效果和速度介于通义千问-Max和通义千问-Turbo之间，适合中等复杂任务。相对于通义千问-Plus-1125版本，中英文整体能力有提升，中英常识知识类、阅读理解能力提升较为显著，codeswtich现象相比上一版有显著改善，中文指令遵循能力显著提升。"),
+        Qwen_plus_2025_01_12("qwen-plus-0112", "通义千问系列能力均衡的模型，推理效果和速度介于通义千问-Max和通义千问-Turbo之间，适合中等复杂任务。相对于通义千问-Plus-2024-1220版本，中英文整体能力有提升，中英常识知识类、阅读理解能力提升较为显著，codeswtich现象相比上一版有显著改善，中文指令遵循能力显著提升。"),
+        Qwen_Turbo("qwen-turbo", "通义千问超大规模语言模型，支持中文英文等不同语言输入。"),
+        Qwen_Turbo_Latest("qwen-turbo-latest", "通义千问系列速度最快、成本很低的模型，适合简单任务。本模型是动态更新版本，模型更新不会提前通知，模型中英文综合能力显著提升，模型人类偏好显著提升，模型推理能力和复杂指令理解能力显著增强，困难任务上的表现更优，数学、代码能力显著提升。"),
         ;
 
         private final String code;
