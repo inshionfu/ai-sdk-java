@@ -7,6 +7,8 @@ import com.inshion.ai.model.Constants;
 import com.inshion.ai.session.Configuration;
 import com.inshion.ai.session.OpenAiSession;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.sse.EventSource;
+import okhttp3.sse.EventSourceListener;
 
 import java.util.Map;
 import java.util.Objects;
@@ -47,5 +49,19 @@ public class DefaultOpenAiSession implements OpenAiSession {
             throw new RuntimeException(chatCompletionRequest.getModel() + " 模型执行器尚未实现");
         }
         return executor.completionSync(chatCompletionRequest);
+    }
+
+    @Override
+    public EventSource completions(ChatCompletionRequest chatCompletionRequest, EventSourceListener eventSourceListener) throws Exception {
+        Executor executor = executorGroup.getOrDefault(chatCompletionRequest.getModel(), executorGroup.get(Constants.Model.DEFAULT.getCode()));
+        if (Objects.isNull(executor)) {
+            throw new RuntimeException(chatCompletionRequest.getModel() + " 模型执行器尚未实现");
+        }
+        return executor.completions(chatCompletionRequest, eventSourceListener);
+    }
+
+    @Override
+    public Configuration configuration() {
+        return null;
     }
 }

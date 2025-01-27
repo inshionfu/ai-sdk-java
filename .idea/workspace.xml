@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="775d4669-6b25-41cd-a108-cb9903fdbd7e" name="Changes" comment="default">
+    <list default="true" id="775d4669-6b25-41cd-a108-cb9903fdbd7e" name="Changes" comment="sync">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inshion/ai/executor/Executor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inshion/ai/executor/Executor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/inshion/ai/executor/aigc/DefaultExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inshion/ai/executor/aigc/DefaultExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inshion/ai/session/OpenAiSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inshion/ai/session/OpenAiSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inshion/ai/session/defaults/DefaultOpenAiSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inshion/ai/session/defaults/DefaultOpenAiSession.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/inshion/ai/test/ApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/inshion/ai/test/ApiTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="feature-250127-completionsync" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -43,11 +47,13 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "JUnit.ApiTest.test_completion_future.executor": "Run",
+    "JUnit.ApiTest.test_completions_stream.executor": "Run",
     "JUnit.ApiTest.test_completions_sync (1).executor": "Run",
+    "JUnit.ApiTest.test_completions_sync (2).executor": "Run",
     "JUnit.ApiTest.test_completions_sync.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature-250127-completionsync",
+    "git-widget-placeholder": "feature-250127-stream",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -57,12 +63,12 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "MavenSettings",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.ApiTest.test_completions_sync (2)">
-    <configuration name="ApiTest.test_completion_future" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ApiTest.test_completions_stream (1)">
+    <configuration name="ApiTest.test_completions_stream (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ai-sdk-java" />
       <extension name="coverage">
         <pattern>
@@ -72,7 +78,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.inshion.ai.test" />
       <option name="MAIN_CLASS_NAME" value="com.inshion.ai.test.ApiTest" />
-      <option name="METHOD_NAME" value="test_completion_future" />
+      <option name="METHOD_NAME" value="test_completions_stream" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ApiTest.test_completions_stream" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ai-sdk-java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.inshion.ai.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.inshion.ai.test" />
+      <option name="MAIN_CLASS_NAME" value="com.inshion.ai.test.ApiTest" />
+      <option name="METHOD_NAME" value="test_completions_stream" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -128,11 +150,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ApiTest.test_completions_stream (1)" />
+        <item itemvalue="JUnit.ApiTest.test_completions_stream" />
         <item itemvalue="JUnit.ApiTest.test_completions_sync (2)" />
         <item itemvalue="JUnit.ApiTest.test_completions_sync (1)" />
         <item itemvalue="JUnit.ApiTest.test_completions_sync" />
-        <item itemvalue="JUnit.ApiTest.test_completion_future" />
-        <item itemvalue="JUnit.ApiTest.test_completion_future" />
       </list>
     </recent_temporary>
   </component>
@@ -153,7 +175,7 @@
       <option name="presentableId" value="Default" />
       <updated>1737952972862</updated>
       <workItem from="1737952974430" duration="455000" />
-      <workItem from="1737953918284" duration="1360000" />
+      <workItem from="1737953918284" duration="3228000" />
     </task>
     <task id="LOCAL-00001" summary="default">
       <option name="closed" value="true" />
@@ -163,7 +185,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737954139449</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="sync">
+      <option name="closed" value="true" />
+      <created>1737955350327</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1737955350327</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,6 +224,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="default" />
-    <option name="LAST_COMMIT_MESSAGE" value="default" />
+    <MESSAGE value="sync" />
+    <option name="LAST_COMMIT_MESSAGE" value="sync" />
   </component>
 </project>
