@@ -106,7 +106,40 @@ public class DefaultExecutor implements Executor, ResultHandler {
     }
 
     @Override
+    public EventSource completions(ChatCompletionRequest chatCompletionRequest, EventSourceListener eventSourceListener) throws Exception {
+        // 构建请求信息
+        Request request = new Request.Builder()
+                .url(configuration.getBaseUrl().concat(IOpenAiApi.v4_completions))
+                .post(RequestBody.create(MediaType.parse(Constants.APPLICATION_JSON), chatCompletionRequest.toString()))
+                .build();
+        return factory.newEventSource(request, chatCompletionRequest.getIsCompatible() ? eventSourceListener(eventSourceListener) : eventSourceListener);
+    }
+
+    @Override
     public EventSourceListener eventSourceListener(EventSourceListener eventSourceListener) {
-        return null;
+        return new EventSourceListener() {
+            @Override
+            public void onEvent(EventSource eventSource, @Nullable String id, @Nullable String type, String data) {
+                if ("[DONE]".equals(data)) {
+                    return;
+                }
+                ChatCompletionResponse response = JSON.parseObject(data, ChatCompletionResponse.class);
+                if (response.getChoices() != null && 1 == response.getChoices().size() && "stop".equals(response.getChoices().get(0).getFinishReason())) {
+                    eventSourceListener.onEvent(eventSource, id, Constants.EventType.finish.getCode(), data);
+                    return;
+                }
+                eventSourceListener.onEvent(eventSource, id, Constants.EventType.add.getCode(), data);
+            }
+
+            @Override
+            public void onClosed(EventSource eventSource) {
+                eventSourceListener.onClosed(eventSource);
+            }
+
+            @Override
+            public void onFailure(EventSource eventSource, @Nullable Throwable t, @Nullable Response response) {
+                eventSourceListener.onFailure(eventSource, t, response);
+            }
+        };
     }
 }
