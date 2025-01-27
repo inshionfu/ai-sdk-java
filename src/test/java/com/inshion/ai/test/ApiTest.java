@@ -31,10 +31,12 @@ public class ApiTest {
     public void test_OpenAiSessionFactory() {
         // 1. 配置文件
         Configuration configuration = new Configuration();
-        configuration.setBaseUrl(Constants.BaseUrl.Doubao.getUrl());
+//        configuration.setBaseUrl(Constants.BaseUrl.Doubao.getUrl());
 //        configuration.setBaseUrl(Constants.BaseUrl.DeepSeek.getUrl());
+        configuration.setBaseUrl(Constants.BaseUrl.Qwen.getUrl());
 //        configuration.setApiKey("sk-368e70846c9e442abc58dd0552b03092"); // deepseek
-        configuration.setApiKey("8e896d03-a8ef-4682-af89-ad68b952ea8f");
+//        configuration.setApiKey("8e896d03-a8ef-4682-af89-ad68b952ea8f"); // doubao
+        configuration.setApiKey("sk-29162448448d4e2aba9b1f801b317488"); // qwen
         configuration.setLevel(HttpLoggingInterceptor.Level.BODY);
         // 2. 会话工厂
         OpenAiSessionFactory factory = new DefaultOpenAiSessionFactory(configuration);
@@ -46,15 +48,16 @@ public class ApiTest {
     public void test_completion_future() throws Exception {
         // 入参；模型、请求信息
         ChatCompletionRequest request = new ChatCompletionRequest();
-        request.setModel(Constants.Model.DeepSeek_V3.getCode());
+//        request.setModel(Constants.Model.DeepSeek_V3.getCode());
 //        request.setModel("ep-20250114151947-75mlc"); // doubao
+        request.setModel(Constants.Model.Qwen_Max.getCode()); // qwen
         request.setPrompt(new ArrayList<ChatCompletionRequest.Prompt>() {
             private static final long serialVersionUID = -7988151926241837899L;
 
             {
                 add(ChatCompletionRequest.Prompt.builder()
                         .role(Constants.Role.user.getCode())
-                        .content("你是什么大模型")
+                        .content("先介绍你是什么大模型，再评价四川大学怎么样")
                         .build());
             }
         });
@@ -70,29 +73,18 @@ public class ApiTest {
         // 入参；模型、请求信息
         ChatCompletionRequest request = new ChatCompletionRequest();
 //        request.setModel(Constants.Model.DeepSeek_V3.getCode());
-        request.setModel("ep-20250114151947-75mlc"); // doubao
+//        request.setModel("ep-20250114151947-75mlc"); // doubao
+        request.setModel(Constants.Model.Qwen_Plus_Latest.getCode()); // doubao
         request.setPrompt(new ArrayList<ChatCompletionRequest.Prompt>() {
             private static final long serialVersionUID = -7988151926241837899L;
 
             {
                 add(ChatCompletionRequest.Prompt.builder()
                         .role(Constants.Role.user.getCode())
-                        .content("你是什么大模型")
+                        .content("先介绍你是什么大模型，再评价四川大学怎么样")
                         .build());
             }
         });
-
-        // 24年1月发布的 glm-3-turbo、glm-4 支持函数、知识库、联网功能
-//        request.setTools(new ArrayList<ChatCompletionRequest.Tool>() {
-//            private static final long serialVersionUID = -7988151926241837899L;
-
-//            {
-//                add(ChatCompletionRequest.Tool.builder()
-//                        .type(ChatCompletionRequest.Tool.Type.web_search)
-//                        .webSearch(ChatCompletionRequest.Tool.WebSearch.builder().enable(true).searchQuery("小傅哥").build())
-//                        .build());
-//            }
-//        });
 
         ChatCompletionSyncResponse response = openAiSession.completionSync(request);
 
@@ -104,7 +96,8 @@ public class ApiTest {
         CountDownLatch countDownLatch = new CountDownLatch(1);
         // 入参；模型、请求信息
         ChatCompletionRequest request = new ChatCompletionRequest();
-        request.setModel("ep-20250114151947-75mlc"); // GLM_3_5_TURBO、GLM_4
+//        request.setModel("ep-20250114151947-75mlc"); // GLM_3_5_TURBO、GLM_4
+        request.setModel(Constants.Model.Qwen_plus_1220.getCode()); // GLM_3_5_TURBO、GLM_4
         request.setStream(true);
         request.setMessages(new ArrayList<ChatCompletionRequest.Prompt>() {
             private static final long serialVersionUID = -7988151926241837899L;
