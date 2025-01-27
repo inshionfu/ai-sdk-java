@@ -24,10 +24,10 @@ public class ApiTest {
     public void test_OpenAiSessionFactory() {
         // 1. 配置文件
         Configuration configuration = new Configuration();
-//        configuration.setBaseUrl(Constants.BaseUrl.Doubao.getUrl());
-        configuration.setBaseUrl(Constants.BaseUrl.DeepSeek.getUrl());
-        configuration.setApiKey("sk-368e70846c9e442abc58dd0552b03092"); // deepseek
-//        configuration.setApiKey("8e896d03-a8ef-4682-af89-ad68b952ea8f");
+        configuration.setBaseUrl(Constants.BaseUrl.Doubao.getUrl());
+//        configuration.setBaseUrl(Constants.BaseUrl.DeepSeek.getUrl());
+//        configuration.setApiKey("sk-368e70846c9e442abc58dd0552b03092"); // deepseek
+        configuration.setApiKey("8e896d03-a8ef-4682-af89-ad68b952ea8f");
         configuration.setLevel(HttpLoggingInterceptor.Level.BODY);
         // 2. 会话工厂
         OpenAiSessionFactory factory = new DefaultOpenAiSessionFactory(configuration);
@@ -39,8 +39,8 @@ public class ApiTest {
     public void test_completion_future() throws Exception {
         // 入参；模型、请求信息
         ChatCompletionRequest request = new ChatCompletionRequest();
-        request.setModel(Constants.Model.DeepSeek_V3.getCode());
-//        request.setModel("ep-20250114151947-75mlc"); // doubao
+//        request.setModel(Constants.Model.DeepSeek_V3.getCode());
+        request.setModel("ep-20250114151947-75mlc"); // doubao
         request.setPrompt(new ArrayList<ChatCompletionRequest.Prompt>() {
             private static final long serialVersionUID = -7988151926241837899L;
 

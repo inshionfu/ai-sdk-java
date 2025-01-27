@@ -20,7 +20,6 @@ public interface IOpenAiApi {
 
     String v3_completions = "api/paas/v3/model-api/{model}/sse-invoke";
     String v3_completions_sync = "api/paas/v3/model-api/{model}/invoke";
-    String v4 = "api/paas/v4/chat/completions";
     String v4_completions = "chat/completions";
 
     @POST(v3_completions)

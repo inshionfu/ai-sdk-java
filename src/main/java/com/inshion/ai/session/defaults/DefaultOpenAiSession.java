@@ -33,7 +33,7 @@ public class DefaultOpenAiSession implements OpenAiSession {
 
     @Override
     public CompletableFuture<String> completions(ChatCompletionRequest chatCompletionRequest) throws Exception {
-        Executor executor = executorGroup.getOrDefault(chatCompletionRequest.getModel(), executorGroup.get(Constants.Model.GLM_3_5_TURBO.getCode()));
+        Executor executor = executorGroup.getOrDefault(chatCompletionRequest.getModel(), executorGroup.get(Constants.Model.DEFAULT.getCode()));
         if (Objects.isNull(executor)) {
             throw new RuntimeException(chatCompletionRequest.getModel() + " 模型执行器尚未实现");
         }
@@ -42,7 +42,7 @@ public class DefaultOpenAiSession implements OpenAiSession {
 
     @Override
     public ChatCompletionSyncResponse completionSync(ChatCompletionRequest chatCompletionRequest) throws Exception {
-        Executor executor = executorGroup.get(chatCompletionRequest.getModel());
+        Executor executor = executorGroup.getOrDefault(chatCompletionRequest.getModel(), executorGroup.get(Constants.Model.DEFAULT.getCode()));
         if (Objects.isNull(executor)) {
             throw new RuntimeException(chatCompletionRequest.getModel() + " 模型执行器尚未实现");
         }

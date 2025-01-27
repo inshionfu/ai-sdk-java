@@ -69,8 +69,11 @@ public class Configuration {
 
     public HashMap<String, Executor> newExecutorGroup() {
         this.executorGroup = new HashMap<>();
-        // TODO 旧版模型，待兼容
         Executor oldExecutor = new DefaultExecutor(this);
+        Executor defaultExecutor = new DefaultExecutor(this);
+        // 默认模型
+        this.executorGroup.put(Constants.Model.DEFAULT.getCode(), defaultExecutor);
+        // TODO 旧版模型，待兼容
         this.executorGroup.put(Constants.Model.CHATGLM_6B_SSE.getCode(), oldExecutor);
         this.executorGroup.put(Constants.Model.CHATGLM_LITE.getCode(), oldExecutor);
         this.executorGroup.put(Constants.Model.CHATGLM_LITE_32K.getCode(), oldExecutor);
@@ -78,7 +81,6 @@ public class Configuration {
         this.executorGroup.put(Constants.Model.CHATGLM_PRO.getCode(), oldExecutor);
         this.executorGroup.put(Constants.Model.CHATGLM_TURBO.getCode(), oldExecutor);
         // 新版模型，配置
-        Executor defaultExecutor = new DefaultExecutor(this);
         this.executorGroup.put(Constants.Model.GLM_3_5_TURBO.getCode(), defaultExecutor);
         this.executorGroup.put(Constants.Model.GLM_4.getCode(), defaultExecutor);
         this.executorGroup.put(Constants.Model.GLM_4V.getCode(), defaultExecutor);

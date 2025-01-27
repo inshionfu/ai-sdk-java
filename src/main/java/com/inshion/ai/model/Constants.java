@@ -39,6 +39,13 @@ public class Constants {
     @Getter
     @AllArgsConstructor
     public enum Model {
+        /**
+         * 默认模型
+         */
+        DEFAULT("default", "默认模型占位符，不存在匹配的执行器时使用"),
+        /**
+         * GLM old
+         */
         @Deprecated
         CHATGLM_6B_SSE("chatGLM_6b_SSE", "ChatGLM-6B 测试模型"),
         @Deprecated
