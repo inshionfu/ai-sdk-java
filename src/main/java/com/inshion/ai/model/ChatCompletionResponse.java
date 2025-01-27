@@ -1,4 +1,4 @@
-package com.inshion.glm.model;
+package com.inshion.ai.model;
 
 import com.alibaba.fastjson2.JSON;
 import com.fasterxml.jackson.annotation.JsonProperty;

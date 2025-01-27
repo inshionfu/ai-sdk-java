@@ -1,4 +1,4 @@
-package com.inshion.glm.model;
+package com.inshion.ai.model;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @ClassName ChatCompletionRequest
@@ -34,7 +35,7 @@ public class ChatCompletionRequest {
     /**
      * 模型
      */
-    private Model model = Model.GLM_3_5_TURBO;
+    private String model;
     /**
      * 请求参数 {"role": "user", "content": "你好"}
      * 24年1月发布的 GLM_3_5_TURBO、GLM_4 模型时新增
@@ -44,7 +45,7 @@ public class ChatCompletionRequest {
      * 请求ID
      */
     @JsonProperty("request_id")
-    private String requestId = String.format("xfg-%d", System.currentTimeMillis());
+    private String requestId = String.format("inshion-%d", System.currentTimeMillis());
     /**
      * do_sample 为 true 时启用采样策略，do_sample 为 false 时采样策略 temperature、top_p 将不生效
      * 24年1月发布的 GLM_3_5_TURBO、GLM_4 模型时新增
@@ -250,46 +251,31 @@ public class ChatCompletionRequest {
 
     }
 
-    @Override
     public String toString() {
         try {
-            // 24年1月发布新模型后调整
-            if (!Model.isOldModel(this.model)) {
-                Map<String, Object> paramsMap = new HashMap<>();
-                paramsMap.put("model", this.model.getCode());
-                if (null == this.messages && null == this.prompt) {
-                    throw new RuntimeException("One of messages or prompt must not be empty！");
-                }
-                paramsMap.put("messages", this.messages != null ? this.messages : this.prompt);
-                if (null != this.requestId) {
-                    paramsMap.put("request_id", this.requestId);
-                }
-                if (null != this.doSample) {
-                    paramsMap.put("do_sample", this.doSample);
-                }
-                paramsMap.put("stream", this.stream);
-                paramsMap.put("temperature", this.temperature);
-                paramsMap.put("top_p", this.topP);
-                paramsMap.put("max_tokens", this.maxTokens);
-                if (null != this.stop && this.stop.size() > 0) {
-                    paramsMap.put("stop", this.stop);
-                }
-                if (null != this.tools && this.tools.size() > 0) {
-                    paramsMap.put("tools", this.tools);
-                    paramsMap.put("tool_choice", this.toolChoice);
-                }
-                return new ObjectMapper().writeValueAsString(paramsMap);
+            Map<String, Object> params = new HashMap<>();
+            params.put("model", model);
+            if (Objects.isNull(this.messages) && Objects.isNull(this.prompt)) {
+                throw new RuntimeException("messages and prompt is null");
             }
-
-            // 默认
-            Map<String, Object> paramsMap = new HashMap<>();
-            paramsMap.put("request_id", requestId);
-            paramsMap.put("prompt", prompt);
-            paramsMap.put("incremental", incremental);
-            paramsMap.put("temperature", temperature);
-            paramsMap.put("top_p", topP);
-            paramsMap.put("sseFormat", sseFormat);
-            return new ObjectMapper().writeValueAsString(paramsMap);
+            params.put("messages", Objects.nonNull(this.messages) ? this.messages : this.prompt);
+            if (Objects.nonNull(this.requestId)) {
+                params.put("requestId", this.requestId);
+            }
+            if (Objects.nonNull(this.doSample)) {
+                params.put("doSample", this.doSample);
+            }
+            params.put("stream", this.stream);
+            params.put("temperature", this.temperature);
+            params.put("topP", this.topP);
+            params.put("maxTokens", this.maxTokens);
+            if (Objects.nonNull(this.stop) && this.stop.size() > 0) {
+                params.put("stop", this.stop);
+            }
+            if (Objects.nonNull(this.tools) && this.tools.size() > 0) {
+                params.put("tools", this.tools);
+            }
+            return new ObjectMapper().writeValueAsString(params);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

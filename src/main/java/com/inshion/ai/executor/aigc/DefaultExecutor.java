@@ -1,13 +1,14 @@
-package com.inshion.glm.executor.aigc;
+package com.inshion.ai.executor.aigc;
 
 import com.alibaba.fastjson.JSON;
-import com.inshion.glm.IOpenAiApi;
-import com.inshion.glm.executor.Executor;
-import com.inshion.glm.executor.result.ResultHandler;
-import com.inshion.glm.model.ChatCompletionRequest;
-import com.inshion.glm.model.ChatCompletionResponse;
-import com.inshion.glm.model.ChatCompletionSyncResponse;
-import com.inshion.glm.session.Configuration;
+import com.inshion.ai.IOpenAiApi;
+import com.inshion.ai.executor.Executor;
+import com.inshion.ai.executor.result.ResultHandler;
+import com.inshion.ai.model.ChatCompletionRequest;
+import com.inshion.ai.model.ChatCompletionResponse;
+import com.inshion.ai.model.ChatCompletionSyncResponse;
+import com.inshion.ai.model.Constants;
+import com.inshion.ai.session.Configuration;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import okhttp3.sse.EventSource;
@@ -27,7 +28,7 @@ import java.util.concurrent.CompletableFuture;
  */
 
 @Slf4j
-public class GLMExecutor implements Executor, ResultHandler {
+public class DefaultExecutor implements Executor, ResultHandler {
 
     private final Configuration configuration;
 
@@ -37,7 +38,7 @@ public class GLMExecutor implements Executor, ResultHandler {
 
     private OkHttpClient okHttpClient;
 
-    public GLMExecutor(Configuration configuration) {
+    public DefaultExecutor(Configuration configuration) {
         this.configuration = configuration;
         this.factory = configuration.createRequestFactory();
         this.openAiApi = configuration.getOpenAiApi();
@@ -50,8 +51,8 @@ public class GLMExecutor implements Executor, ResultHandler {
         CompletableFuture<String> future = new CompletableFuture<>();
         StringBuffer buffer = new StringBuffer();
         Request request = new Request.Builder()
-                .url(configuration.getApiHost().concat(IOpenAiApi.v4_completions))
-                .post(RequestBody.create(MediaType.parse("application/json;charset=utf-8"), chatCompletionRequest.toString()))
+                .url(configuration.getBaseUrl().concat(IOpenAiApi.v4_completions))
+                .post(RequestBody.create(MediaType.parse(Constants.APPLICATION_JSON), chatCompletionRequest.toString()))
                 .build();
         factory.newEventSource(request, new EventSourceListener() {
 

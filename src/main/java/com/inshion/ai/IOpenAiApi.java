@@ -1,8 +1,8 @@
-package com.inshion.glm;
+package com.inshion.ai;
 
-import com.inshion.glm.model.ChatCompletionRequest;
-import com.inshion.glm.model.ChatCompletionResponse;
-import com.inshion.glm.model.ChatCompletionSyncResponse;
+import com.inshion.ai.model.ChatCompletionRequest;
+import com.inshion.ai.model.ChatCompletionResponse;
+import com.inshion.ai.model.ChatCompletionSyncResponse;
 import io.reactivex.Single;
 import retrofit2.http.Body;
 import retrofit2.http.POST;

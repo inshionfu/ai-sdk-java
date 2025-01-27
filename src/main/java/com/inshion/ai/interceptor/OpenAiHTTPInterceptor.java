@@ -1,6 +1,7 @@
-package com.inshion.glm.interceptor;
+package com.inshion.ai.interceptor;
 
-import com.inshion.glm.session.Configuration;
+import com.inshion.ai.model.Constants;
+import com.inshion.ai.session.Configuration;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -32,9 +33,9 @@ public class OpenAiHTTPInterceptor implements Interceptor {
         Request request = original.newBuilder()
                 .url(original.url())
 //                .header("Authorization", "Bearer " + BearerTokenUtils.getToken(configuration.getApiKey(), configuration.getApiSecret()))
-                .header("Authorization", "Bearer " + configuration.getApiSecretKey())
-                .header("Content-Type", Configuration.JSON_CONTENT_TYPE)
-                .header("User-Agent", Configuration.DEFAULT_USER_AGENT)
+                .header("Authorization", "Bearer " + configuration.getApiKey())
+                .header("Content-Type", Constants.JSON_CONTENT_TYPE)
+                .header("User-Agent", Constants.DEFAULT_USER_AGENT)
                 .method(original.method(), original.body())
                 .build();
         return chain.proceed(request);

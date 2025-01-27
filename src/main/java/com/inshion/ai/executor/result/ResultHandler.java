@@ -1,4 +1,4 @@
-package com.inshion.glm.executor.result;
+package com.inshion.ai.executor.result;
 
 import okhttp3.sse.EventSourceListener;
 

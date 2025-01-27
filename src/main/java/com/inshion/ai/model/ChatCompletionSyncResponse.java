@@ -1,4 +1,4 @@
-package com.inshion.glm.model;
+package com.inshion.ai.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

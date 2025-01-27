@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.inshion</groupId>
-    <artifactId>glm-sdk-java</artifactId>
+    <artifactId>ai-sdk-java</artifactId>
     <version>1.0</version>
 
-    <name>glm-sdk-java</name>
+    <name>ai-sdk-java</name>
     <description>OpenAI Java SDK, ZhiPuAi ChatGLM Java SDK</description>
     <url>https://github.com/MidnightCall/glm-sdk-java.git</url>
 
@@ -24,7 +24,7 @@
         <developer>
             <id>inshion</id>
             <name>inshion</name>
-            <email>inshion@foxmail.com</email>
+            <email>inshionlife@163.com</email>
             <url>https://github.com/inshionfu</url>
             <organizationUrl>https://github.com/inshionfu/glm-sdk-java.git</organizationUrl>
             <timezone>Asia/Shanghai</timezone>

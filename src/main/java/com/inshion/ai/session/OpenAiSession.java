@@ -1,7 +1,7 @@
-package com.inshion.glm.session;
+package com.inshion.ai.session;
 
-import com.inshion.glm.model.ChatCompletionRequest;
-import com.inshion.glm.model.ChatCompletionSyncResponse;
+import com.inshion.ai.model.ChatCompletionRequest;
+import com.inshion.ai.model.ChatCompletionSyncResponse;
 
 import java.util.concurrent.CompletableFuture;
 

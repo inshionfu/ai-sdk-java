@@ -1,4 +1,4 @@
-package com.inshion.glm.session;
+package com.inshion.ai.session;
 
 public interface OpenAiSessionFactory {
     OpenAiSession openSession();

@@ -1,11 +1,11 @@
-package com.inshion.glm.session.defaults;
+package com.inshion.ai.session.defaults;
 
-import com.inshion.glm.executor.Executor;
-import com.inshion.glm.model.ChatCompletionRequest;
-import com.inshion.glm.model.ChatCompletionSyncResponse;
-import com.inshion.glm.model.Model;
-import com.inshion.glm.session.Configuration;
-import com.inshion.glm.session.OpenAiSession;
+import com.inshion.ai.executor.Executor;
+import com.inshion.ai.model.ChatCompletionRequest;
+import com.inshion.ai.model.ChatCompletionSyncResponse;
+import com.inshion.ai.model.Constants;
+import com.inshion.ai.session.Configuration;
+import com.inshion.ai.session.OpenAiSession;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
@@ -21,18 +21,19 @@ import java.util.concurrent.CompletableFuture;
  */
 @Slf4j
 public class DefaultOpenAiSession implements OpenAiSession {
+
     private final Configuration configuration;
 
-    private final Map<Model, Executor> executorGroup;
+    private final Map<String, Executor> executorGroup;
 
-    public DefaultOpenAiSession(Configuration configuration, Map<Model, Executor> executorGroup) {
+    public DefaultOpenAiSession(Configuration configuration, Map<String, Executor> executorGroup) {
         this.configuration = configuration;
         this.executorGroup = executorGroup;
     }
 
     @Override
     public CompletableFuture<String> completions(ChatCompletionRequest chatCompletionRequest) throws Exception {
-        Executor executor = executorGroup.get(chatCompletionRequest.getModel());
+        Executor executor = executorGroup.getOrDefault(chatCompletionRequest.getModel(), executorGroup.get(Constants.Model.GLM_3_5_TURBO.getCode()));
         if (Objects.isNull(executor)) {
             throw new RuntimeException(chatCompletionRequest.getModel() + " 模型执行器尚未实现");
         }

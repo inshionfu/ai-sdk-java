@@ -1,12 +1,11 @@
-package com.inshion.glm.session.defaults;
+package com.inshion.ai.session.defaults;
 
-import com.inshion.glm.IOpenAiApi;
-import com.inshion.glm.executor.Executor;
-import com.inshion.glm.interceptor.OpenAiHTTPInterceptor;
-import com.inshion.glm.model.Model;
-import com.inshion.glm.session.Configuration;
-import com.inshion.glm.session.OpenAiSession;
-import com.inshion.glm.session.OpenAiSessionFactory;
+import com.inshion.ai.IOpenAiApi;
+import com.inshion.ai.executor.Executor;
+import com.inshion.ai.interceptor.OpenAiHTTPInterceptor;
+import com.inshion.ai.session.Configuration;
+import com.inshion.ai.session.OpenAiSession;
+import com.inshion.ai.session.OpenAiSessionFactory;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -50,7 +49,7 @@ public class DefaultOpenAiSessionFactory implements OpenAiSessionFactory {
 
         // 3.创建api服务
         IOpenAiApi openAiApi = new Retrofit.Builder()
-                .baseUrl(configuration.getApiHost())
+                .baseUrl(configuration.getBaseUrl())
                 .client(client)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(JacksonConverterFactory.create())
@@ -59,7 +58,7 @@ public class DefaultOpenAiSessionFactory implements OpenAiSessionFactory {
         configuration.setOpenAiApi(openAiApi);
 
         // 4.实例化执行器
-        HashMap<Model, Executor> executorGroup = configuration.newExecutorGroup();
+        HashMap<String, Executor> executorGroup = configuration.newExecutorGroup();
         return new DefaultOpenAiSession(configuration, executorGroup);
     }
 }
