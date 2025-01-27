@@ -89,7 +89,20 @@ public class DefaultExecutor implements Executor, ResultHandler {
 
     @Override
     public ChatCompletionSyncResponse completionSync(ChatCompletionRequest chatCompletionRequest) throws Exception {
-        return null;
+        // 同步请求
+        chatCompletionRequest.setStream(false);
+        // 请求信息
+        Request request = new Request.Builder()
+                .url(configuration.getBaseUrl().concat(IOpenAiApi.v4_completions))
+                .post(RequestBody.create(MediaType.parse(Constants.APPLICATION_JSON), chatCompletionRequest.toString()))
+                .build();
+
+        OkHttpClient okHttpClient = configuration.getOkHttpClient();
+        Response response = okHttpClient.newCall(request).execute();
+        if (!response.isSuccessful()) {
+            throw new RuntimeException("request failed: " + response.code());
+        }
+        return JSON.parseObject(response.body().string(), ChatCompletionSyncResponse.class);
     }
 
     @Override

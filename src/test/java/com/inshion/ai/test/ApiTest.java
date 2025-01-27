@@ -39,15 +39,15 @@ public class ApiTest {
     public void test_completion_future() throws Exception {
         // 入参；模型、请求信息
         ChatCompletionRequest request = new ChatCompletionRequest();
-//        request.setModel(Constants.Model.DeepSeek_V3.getCode());
-        request.setModel("ep-20250114151947-75mlc"); // doubao
+        request.setModel(Constants.Model.DeepSeek_V3.getCode());
+//        request.setModel("ep-20250114151947-75mlc"); // doubao
         request.setPrompt(new ArrayList<ChatCompletionRequest.Prompt>() {
             private static final long serialVersionUID = -7988151926241837899L;
 
             {
                 add(ChatCompletionRequest.Prompt.builder()
                         .role(Constants.Role.user.getCode())
-                        .content("四川大学在哪里")
+                        .content("你是什么大模型")
                         .build());
             }
         });
@@ -59,32 +59,33 @@ public class ApiTest {
     }
 
     @Test
-    public void test_completions_sync_01() throws Exception {
+    public void test_completions_sync() throws Exception {
         // 入参；模型、请求信息
         ChatCompletionRequest request = new ChatCompletionRequest();
-        request.setModel(Constants.Model.GLM_3_5_TURBO.getCode()); // chatGLM_6b_SSE、chatglm_lite、chatglm_lite_32k、chatglm_std、chatglm_pro
+//        request.setModel(Constants.Model.DeepSeek_V3.getCode());
+        request.setModel("ep-20250114151947-75mlc"); // doubao
         request.setPrompt(new ArrayList<ChatCompletionRequest.Prompt>() {
             private static final long serialVersionUID = -7988151926241837899L;
 
             {
                 add(ChatCompletionRequest.Prompt.builder()
                         .role(Constants.Role.user.getCode())
-                        .content("四川大学在哪里")
+                        .content("你是什么大模型")
                         .build());
             }
         });
 
         // 24年1月发布的 glm-3-turbo、glm-4 支持函数、知识库、联网功能
-        request.setTools(new ArrayList<ChatCompletionRequest.Tool>() {
-            private static final long serialVersionUID = -7988151926241837899L;
+//        request.setTools(new ArrayList<ChatCompletionRequest.Tool>() {
+//            private static final long serialVersionUID = -7988151926241837899L;
 
-            {
-                add(ChatCompletionRequest.Tool.builder()
-                        .type(ChatCompletionRequest.Tool.Type.web_search)
-                        .webSearch(ChatCompletionRequest.Tool.WebSearch.builder().enable(true).searchQuery("小傅哥").build())
-                        .build());
-            }
-        });
+//            {
+//                add(ChatCompletionRequest.Tool.builder()
+//                        .type(ChatCompletionRequest.Tool.Type.web_search)
+//                        .webSearch(ChatCompletionRequest.Tool.WebSearch.builder().enable(true).searchQuery("小傅哥").build())
+//                        .build());
+//            }
+//        });
 
         ChatCompletionSyncResponse response = openAiSession.completionSync(request);
 
